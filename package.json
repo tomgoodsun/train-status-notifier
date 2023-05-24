@@ -1,0 +1,26 @@
+{
+  "name": "train-status-notifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomgoodsun/train-status-notifier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomgoodsun/train-status-notifier/issues"
+  },
+  "homepage": "https://github.com/tomgoodsun/train-status-notifier#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12",
+    "nodemailer": "^6.9.2"
+  },
+  "devDependencies": {}
+}
