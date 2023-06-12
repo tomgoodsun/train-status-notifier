@@ -33,26 +33,35 @@ getHtml = async () => {
   return response.data;
 };
 
-getTrainStatus().then((result) => {
-  // Loop result and create message formatted like 'JR山手線: 運転見合わせ'.
-  // Concat messages and assign it to variable 'message'.
-  // Print 'message'.
-  let message = '';
-  result.forEach((elem) => {
-    message += `${elem.line}: ${elem.status}\n`;
-  });
+// add main function
+// call getTrainStatus() and get result
+// catch error and print it
+const main = async () => {
+  try {
+    const result = await getTrainStatus();
 
-  // Use Yoda notation to avoid mistake.
-  if (message.length === 0) {
-    message = '運行情報はありません。';
+    let message = '';
+    result.forEach((elem) => {
+      message += `${elem.line}: ${elem.status}\n`;
+    });
+    // Use Yoda notation to avoid mistake.
+    if (message.length === 0) {
+      message = '運行情報はありません。';
+    }
+
+    // Add title to message.
+    message = '運行情報\n' + message;
+
+    // Notify message to Slack.
+    // See https://api.slack.com/messaging/webhooks
+    axios.post(config.slack.url, {text: message});
+
+    console.log(message);
+
+  } catch (error) {
+    console.error(error.getCode());
+    console.error(error.getMessage());
   }
+};
 
-  // Add title to message.
-  message = '運行情報\n' + message;
-
-  // Notify message to Slack.
-  // See https://api.slack.com/messaging/webhooks
-  axios.post(config.slack.url, {text: message});
-
-  console.log(message);
-});
+main();
